@@ -1,18 +1,24 @@
 {
   "version": 2,
-  "dgSpecHash": "sl3GUfLgGlc=",
+  "dgSpecHash": "C3T1BjMRkTA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\William Vandergraaf\\Desktop\\wpm\\WPM-Tracker\\WPM-Tracker.csproj",
+  "projectFilePath": "/home/runner/work/typing-speed-windows/typing-speed-windows/WPM-Tracker.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\William Vandergraaf\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
-    "C:\\Users\\William Vandergraaf\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512"
+    "/home/runner/work/typing-speed-windows/.codeql-scratch/dbs/csharp/working/packages/livecharts/0.9.7/livecharts.0.9.7.nupkg.sha512",
+    "/home/runner/work/typing-speed-windows/.codeql-scratch/dbs/csharp/working/packages/livecharts.wpf/0.9.7/livecharts.wpf.0.9.7.nupkg.sha512",
+    "/home/runner/work/typing-speed-windows/.codeql-scratch/dbs/csharp/working/packages/microsoft.netcore.app.ref/9.0.11/microsoft.netcore.app.ref.9.0.11.nupkg.sha512",
+    "/home/runner/work/typing-speed-windows/.codeql-scratch/dbs/csharp/working/packages/microsoft.windowsdesktop.app.ref/9.0.11/microsoft.windowsdesktop.app.ref.9.0.11.nupkg.sha512",
+    "/home/runner/work/typing-speed-windows/.codeql-scratch/dbs/csharp/working/packages/microsoft.aspnetcore.app.ref/9.0.11/microsoft.aspnetcore.app.ref.9.0.11.nupkg.sha512",
+    "/home/runner/work/typing-speed-windows/.codeql-scratch/dbs/csharp/working/packages/microsoft.netcore.app.host.linux-x64/9.0.11/microsoft.netcore.app.host.linux-x64.9.0.11.nupkg.sha512"
   ],
   "logs": [
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'LiveCharts 0.9.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "projectPath": "/home/runner/work/typing-speed-windows/typing-speed-windows/WPM-Tracker.csproj",
+      "warningLevel": 1,
+      "filePath": "/home/runner/work/typing-speed-windows/typing-speed-windows/WPM-Tracker.csproj",
       "libraryId": "LiveCharts",
       "targetGraphs": [
         "net9.0-windows7.0"
@@ -21,8 +27,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'LiveCharts.Wpf 0.9.7' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net9.0-windows7.0'. This package may not be fully compatible with your project.",
+      "projectPath": "/home/runner/work/typing-speed-windows/typing-speed-windows/WPM-Tracker.csproj",
+      "warningLevel": 1,
+      "filePath": "/home/runner/work/typing-speed-windows/typing-speed-windows/WPM-Tracker.csproj",
       "libraryId": "LiveCharts.Wpf",
       "targetGraphs": [
         "net9.0-windows7.0"
