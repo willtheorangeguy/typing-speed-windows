@@ -57,4 +57,36 @@ public class MeasureModelTests
         Assert.Equal(expectedTicks, model.DateTimeTicks);
         Assert.Equal(expectedWpm, model.WpmValue);
     }
+
+    [Theory]
+    [InlineData(0.0)]
+    [InlineData(50.5)]
+    [InlineData(100.0)]
+    [InlineData(150.75)]
+    [InlineData(200.0)]
+    public void MeasureModel_AcceptsVariousWpmValues(double wpmValue)
+    {
+        // Arrange
+        var model = new MeasureModel();
+
+        // Act
+        model.WpmValue = wpmValue;
+
+        // Assert
+        Assert.Equal(wpmValue, model.WpmValue);
+    }
+
+    [Fact]
+    public void MeasureModel_CanBeInstantiatedMultipleTimes()
+    {
+        // Arrange & Act
+        var model1 = new MeasureModel { DateTimeTicks = 100, WpmValue = 50.0 };
+        var model2 = new MeasureModel { DateTimeTicks = 200, WpmValue = 75.0 };
+
+        // Assert
+        Assert.Equal(100, model1.DateTimeTicks);
+        Assert.Equal(50.0, model1.WpmValue);
+        Assert.Equal(200, model2.DateTimeTicks);
+        Assert.Equal(75.0, model2.WpmValue);
+    }
 }
