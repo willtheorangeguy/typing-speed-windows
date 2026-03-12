@@ -65,9 +65,3 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
-      - name: Attach installer to GitHub release
-        if: github.event_name == 'release'
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist\WinTypingSpeed-${{ steps.version.outputs.version }}-Setup.exe
-          tag_name: ${{ github.event.release.tag_name }}
