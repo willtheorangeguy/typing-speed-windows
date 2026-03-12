@@ -1,0 +1,11 @@
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\bin\Debug\net8.0\WinTypingSpeed.Core.deps.json
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\bin\Debug\net8.0\WinTypingSpeed.Core.dll
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\bin\Debug\net8.0\WinTypingSpeed.Core.pdb
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\WinTypingSpeed.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\WinTypingSpeed.Core.AssemblyInfoInputs.cache
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\WinTypingSpeed.Core.AssemblyInfo.cs
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\WinTypingSpeed.Core.csproj.CoreCompileInputs.cache
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\WinTypingSpeed.Core.dll
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\refint\WinTypingSpeed.Core.dll
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\WinTypingSpeed.Core.pdb
+C:\Users\William Vandergraaf\Desktop\wintypingspeed\WinTypingSpeed.Core\obj\Debug\net8.0\ref\WinTypingSpeed.Core.dll

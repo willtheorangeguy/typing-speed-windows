@@ -1,0 +1,75 @@
+<Window x:Class="WinTypingSpeed.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Win Typing Speed"
+        Width="320"
+        Height="280"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Border Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,16">
+                <TextBlock Text="Current WPM" FontSize="14" Foreground="#666666" />
+                <TextBlock x:Name="WpmValueText"
+                           Margin="0,4,0,0"
+                           FontSize="34"
+                           FontWeight="SemiBold"
+                           Text="0.0" />
+            </StackPanel>
+
+            <Grid Grid.Row="1" Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Status" FontWeight="SemiBold" />
+                <TextBlock x:Name="StatusValueText" Grid.Column="1" Text="Tracking" />
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Typed characters" FontWeight="SemiBold" />
+                <TextBlock x:Name="CharactersValueText" Grid.Column="1" Text="0" />
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0,0,0,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Estimated words" FontWeight="SemiBold" />
+                <TextBlock x:Name="WordsValueText" Grid.Column="1" Text="0" />
+            </Grid>
+
+            <Grid Grid.Row="4" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Active time" FontWeight="SemiBold" />
+                <TextBlock x:Name="ActiveTimeValueText" Grid.Column="1" Text="00:00:00" />
+            </Grid>
+
+            <UniformGrid Grid.Row="5" Columns="3" HorizontalAlignment="Stretch">
+                <Button x:Name="PauseButton" Margin="0,0,8,0" Padding="10,6" Click="PauseButton_OnClick">Pause</Button>
+                <Button x:Name="ResumeButton" Margin="0,0,8,0" Padding="10,6" Click="ResumeButton_OnClick">Resume</Button>
+                <Button Padding="10,6" Click="ResetButton_OnClick">Reset</Button>
+            </UniformGrid>
+        </Grid>
+    </Border>
+</Window>

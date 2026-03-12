@@ -1,0 +1,73 @@
+name: Build Installer
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number (e.g. 1.2.3). Leave blank to use the latest git tag or 1.0.0."
+        required: false
+        default: ""
+
+  release:
+    types: [published]
+
+jobs:
+  build-installer:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0    # needed so git describe can find tags for version resolution
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Resolve version
+        id: version
+        shell: pwsh
+        run: |
+          # Priority: workflow_dispatch input > release tag > git describe > default
+          $v = '${{ github.event.inputs.version }}'.Trim()
+
+          if (-not $v -and '${{ github.event_name }}' -eq 'release') {
+            $v = '${{ github.event.release.tag_name }}' -replace '^v',''
+          }
+
+          if (-not $v) {
+            try {
+              $tag = git describe --tags --abbrev=0 2>$null
+              if ($tag -match '^v?(\d+\.\d+\.\d+)') { $v = $Matches[1] }
+            } catch {}
+          }
+
+          if (-not $v) { $v = '1.0.0' }
+
+          Write-Host "Resolved version: $v"
+          "version=$v" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      - name: Build installer
+        shell: pwsh
+        run: .\build-installer.ps1 -Version '${{ steps.version.outputs.version }}' -Configuration Release
+
+      - name: Run tests
+        shell: pwsh
+        run: dotnet test WinTypingSpeed.sln --configuration Release -v minimal
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WinTypingSpeed-${{ steps.version.outputs.version }}-Setup
+          path: dist\WinTypingSpeed-${{ steps.version.outputs.version }}-Setup.exe
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Attach installer to GitHub release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist\WinTypingSpeed-${{ steps.version.outputs.version }}-Setup.exe
+          tag_name: ${{ github.event.release.tag_name }}

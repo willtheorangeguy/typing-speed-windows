@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "WinTypingSpeed.App/1.0.0": {
+        "dependencies": {
+          "WinTypingSpeed.Core": "1.0.0"
+        },
+        "runtime": {
+          "WinTypingSpeed.App.dll": {}
+        }
+      },
+      "WinTypingSpeed.Core/1.0.0": {
+        "runtime": {
+          "WinTypingSpeed.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WinTypingSpeed.App/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "WinTypingSpeed.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
