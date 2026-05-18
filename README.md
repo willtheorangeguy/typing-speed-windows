@@ -107,8 +107,3 @@ The `Build Installer` workflow (`.github/workflows/build-installer.yml`) runs on
 | Release published | Builds the installer, uploads it as an artifact, and attaches it to the GitHub release |
 
 To trigger a manual build: go to **Actions → Build Installer → Run workflow** and optionally supply a version string.
-
-## Notes
-
-- Global keyboard tracking is used only to derive aggregate typing metrics.
-- The app currently focuses on session tracking only; it does not save historical sessions.
