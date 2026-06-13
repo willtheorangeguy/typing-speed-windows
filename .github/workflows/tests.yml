@@ -1,0 +1,33 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      # The core library and its tests target net8.0 (no Windows-specific
+      # dependencies), so they build and run on Linux. The WPF app project is
+      # Windows-only and is intentionally not part of this job.
+      - name: Restore
+        run: dotnet restore WinTypingSpeed.Core.Tests/WinTypingSpeed.Core.Tests.csproj
+
+      - name: Build
+        run: dotnet build WinTypingSpeed.Core.Tests/WinTypingSpeed.Core.Tests.csproj --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test WinTypingSpeed.Core.Tests/WinTypingSpeed.Core.Tests.csproj --configuration Release --no-build --verbosity normal
