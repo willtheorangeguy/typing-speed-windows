@@ -48,3 +48,5 @@ coverage*.info
 # OS files
 .DS_Store
 Thumbs.db
+.bandit/
+.recall/
