@@ -1,109 +1,72 @@
-# WinTypingSpeed
+<!-- Logo -->
+<h1 align="center">WinTypingSpeed</h1>
 
-`WinTypingSpeed` is a Windows tray app that tracks your live typing speed across Windows applications and shows session metrics for:
+<!-- Copy -->
+<h4 align="center">A Windows tray app that tracks your typing speed across every application — without ever knowing what you typed.</h4>
 
-- current WPM
-- total typed characters
-- estimated words
-- active session time
-- pause/resume state
-- reset of the current session
+<!-- Badges -->
+<div align="center">
+  <img alt="Build Installer" src="https://img.shields.io/github/actions/workflow/status/willtheorangeguy/typing-speed-windows/build-installer.yml?label=installer">
+  <img alt="GitHub Issues" src="https://img.shields.io/github/issues/willtheorangeguy/typing-speed-windows">
+  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/willtheorangeguy/typing-speed-windows">
+  <img alt="License" src="https://img.shields.io/github/license/willtheorangeguy/typing-speed-windows">
+</div>
 
-The app is built as a native `.NET 8` WPF desktop application with a separate core library for session logic and an xUnit test project for validation.
+<!-- Navigation -->
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#support">Support</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#license">License</a>
+</p>
 
-## Project structure
+## Key Features
 
-- `WinTypingSpeed.App` - WPF desktop app, tray icon host, global keyboard hook, and session window
-- `WinTypingSpeed.Core` - framework-agnostic session tracking logic
-- `WinTypingSpeed.Core.Tests` - unit tests for session math and lifecycle behavior
-- `installer/WinTypingSpeed.iss` - Inno Setup 6 installer script
-- `build-installer.ps1` - PowerShell script to publish the app and compile the installer
-- `.github/workflows/build-installer.yml` - GitHub Actions workflow for automated installer builds
-- `WinTypingSpeed.sln` - solution file
+- Live WPM, characters, words, and session time, from the tray or the main window.
+- Works across every Windows application, not just an editor.
+- **Cannot record what you type** — the hook never resolves a keystroke to its actual character. Every typing key becomes the letter `a`; only space and enter are distinguished, because only word boundaries matter.
+- Auto-pauses on lock or sleep, and resumes afterwards if it was running.
+- Native .NET 8 WPF, no NuGet packages outside the test project, and no network code at all.
+- Ships as a self-contained Inno Setup installer with the runtime bundled.
 
-## Current behavior
+## Installation
 
-- Tracks printable keyboard input globally across Windows while the app is running
-- Estimates words using whitespace-delimited word boundaries
-- Shows current WPM and session stats from the tray menu and the main app window
-- Automatically pauses tracking during Windows lock/suspend and resumes after unlock/resume if the app was previously active
-- Does not persist or display raw typed text
+Download the latest `WinTypingSpeed-x.y.z-Setup.exe` from [Releases](https://github.com/willtheorangeguy/typing-speed-windows/releases) and run it.
 
-## Requirements
-
-- Windows 10 or Windows 11
-- `.NET 8 SDK` to build from source
-
-You can verify your SDK with:
-
-```powershell
-dotnet --version
-```
-
-## Build
-
-From the repository root:
+Or build from source with the .NET 8 SDK:
 
 ```powershell
 dotnet build .\WinTypingSpeed.sln
-```
-
-## Run
-
-To run the app directly from source:
-
-```powershell
 dotnet run --project .\WinTypingSpeed.App\WinTypingSpeed.App.csproj
 ```
 
-When the app starts, it lives in the Windows notification area/system tray. Double-click the tray icon or use the tray menu to open the main window.
+## Usage
 
-## Test
+The app lives in the notification area. Double-click the tray icon for the main window, or use the tray menu to pause, resume, or reset.
 
-To run the unit tests:
+## Documentation
 
-```powershell
-dotnet test .\WinTypingSpeed.sln
-```
+Full documentation lives in [`docs/`](docs/README.md):
+[Quickstart](docs/quickstart.md) · [Installation](docs/installation.md) · [Configuration](docs/configuration.md) · [Architecture](docs/architecture.md) · [Development](docs/development.md) · [Deployment](docs/deployment.md) · [FAQ](docs/faq.md) · [Troubleshooting](docs/troubleshooting.md) · [Roadmap](docs/roadmap.md)
 
-## Install / publish
+## Support
 
-### Download the installer
+Open a [GitHub Discussion](https://github.com/willtheorangeguy/typing-speed-windows/discussions/new) or file an [issue](https://github.com/willtheorangeguy/typing-speed-windows/issues/new/choose).
 
-Download the latest `WinTypingSpeed-x.y.z-Setup.exe` from the [Releases](../../releases) page and run it. The installer:
+## Contributing
 
-- Bundles the .NET runtime — no separate .NET installation required
-- Installs to `C:\Program Files\WinTypingSpeed`
-- Creates a Start Menu shortcut
-- Optionally creates a desktop shortcut
-- Optionally adds a Windows startup entry so the app launches at sign-in (enabled by default)
-- Includes an uninstaller (available from Add/Remove Programs or the Start Menu)
+Contributions welcome. See the org-wide [Contributing Guide](https://github.com/willtheorangeguy/.github/blob/main/CONTRIBUTING.md) and [Code of Conduct](https://github.com/willtheorangeguy/.github/blob/main/CODE_OF_CONDUCT.md).
 
-### Build the installer locally
+## Credits
 
-**Prerequisites:** [Inno Setup 6](https://jrsoftware.org/isdl.php) installed (add `ISCC.exe` to PATH, or the script will find it at the default install location).
+Built with [.NET 8](https://dotnet.microsoft.com/) and WPF. Installer by [Inno Setup 6](https://jrsoftware.org/isinfo.php). Tested with [xUnit](https://xunit.net/).
 
-From the repository root:
+## License
 
-```powershell
-.\build-installer.ps1
-```
+MIT — see [`LICENSE.md`](LICENSE.md).
 
-To specify a version explicitly:
-
-```powershell
-.\build-installer.ps1 -Version 1.2.3
-```
-
-The installer will be written to `dist\WinTypingSpeed-<version>-Setup.exe`. The script automatically resolves the version from the most recent git tag if `-Version` is not supplied.
-
-### Automated builds (GitHub Actions)
-
-The `Build Installer` workflow (`.github/workflows/build-installer.yml`) runs on:
-
-| Trigger | Behaviour |
-|---|---|
-| `workflow_dispatch` | Builds the installer and uploads it as a workflow artifact (90-day retention) |
-| Release published | Builds the installer, uploads it as an artifact, and attaches it to the GitHub release |
-
-To trigger a manual build: go to **Actions → Build Installer → Run workflow** and optionally supply a version string.
+> A global keyboard hook is a serious thing to install. [`docs/architecture.md`](docs/architecture.md) explains exactly what this one does and does not see.
