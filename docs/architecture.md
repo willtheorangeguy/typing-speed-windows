@@ -3,7 +3,7 @@
 Three projects with strict layering: Core knows nothing about UI, App knows nothing about
 counting.
 
-```
+```text
 keystroke (anywhere in Windows)
    └── WH_KEYBOARD_LL hook
           └── TryClassifyKey  → ' ' | 'a' | ignored
@@ -77,7 +77,7 @@ never consulted. See [`internal/known-issues.md`](./internal/known-issues.md).
 
 **WPM.**
 
-```
+```text
 effectiveWordCount = estimatedWordCount + (currentWordCharacterCount > 0 ? 1 : 0)
 CurrentWpm = effectiveWordCount / activeTime.TotalMinutes
 ```

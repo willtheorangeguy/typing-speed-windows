@@ -7,12 +7,11 @@ licensing decision rather than a documentation one.
 Ordered by severity. See [`docs/roadmap.md`](../roadmap.md) for the narrative version,
 which also covers deliberate non-goals.
 
-
 **5 open:** 1 high, 3 medium, 1 low.
 
 ## 1. "Active time" is elapsed time, so WPM decays for as long as the app runs
 
-**Severity:** High  
+**Severity:** High
 **Where:** `WinTypingSpeed.Core/TypingSessionTracker.cs` -> `GetCurrentSegmentDuration`, `GetSnapshot`
 
 **What:** `GetCurrentSegmentDuration` returns `now - activeSegmentStartedAt` -- wall-clock time since the session started or was last resumed -- and `GetSnapshot` divides the word count by it. `lastInputAt` is recorded on every keystroke, carried in the snapshot, and displayed, but is never used in any calculation. The only things that stop the clock are a manual pause, workstation lock, and system suspend. Idleness does not.
@@ -23,7 +22,7 @@ which also covers deliberate non-goals.
 
 ## 2. Keyboard shortcuts are counted as typed characters
 
-**Severity:** Medium  
+**Severity:** Medium
 **Where:** `WinTypingSpeed.App/Services/GlobalKeyboardHook.cs` -> `HandleHook`, `TryClassifyKey`
 
 **What:** The hook handles `WM_KEYDOWN` **and** `WM_SYSKEYDOWN` (the Alt-combination message), and `TryClassifyKey` consults only the virtual-key code. Modifier state is never checked -- not via `GetKeyState`, and not via the `Flags` field of `KBDLLHOOKSTRUCT`, which the struct declares and the code reads but never uses. `Ctrl+S`, `Ctrl+C`, `Ctrl+Shift+P`, and `Alt+F` all count their letter as a typed character.
@@ -34,7 +33,7 @@ which also covers deliberate non-goals.
 
 ## 3. Key auto-repeat is counted, so holding a key inflates the count
 
-**Severity:** Medium  
+**Severity:** Medium
 **Where:** `WinTypingSpeed.App/Services/GlobalKeyboardHook.cs` -> `HandleHook`
 
 **What:** Holding a key produces repeated `WM_KEYDOWN` messages at the system repeat rate, and each one is classified and counted. There is no de-duplication: no tracking of which keys are currently down, and no use of the timestamp available in `KBDLLHOOKSTRUCT.Time`.
@@ -45,7 +44,7 @@ which also covers deliberate non-goals.
 
 ## 4. A hook removed by Windows for exceeding its timeout is never detected
 
-**Severity:** Medium  
+**Severity:** Medium
 **Where:** `WinTypingSpeed.App/Services/GlobalKeyboardHook.cs`, `WinTypingSpeed.App/App.xaml.cs`
 
 **What:** Windows silently uninstalls a `WH_KEYBOARD_LL` hook whose callback exceeds `LowLevelHooksTimeout` (300 ms by default) -- no callback, no error, no notification. `Start()` throws if `SetWindowsHookEx` fails, but nothing afterwards verifies the hook is still installed, and `hookHandle` remains non-zero, so `Start()` would decline to reinstall even if something called it.
@@ -56,7 +55,7 @@ which also covers deliberate non-goals.
 
 ## 5. build-installer.ps1 falls back to version 1.0.0 silently
 
-**Severity:** Low  
+**Severity:** Low
 **Where:** `build-installer.ps1`
 
 **What:** The version is resolved as `-Version`, then `$env:GITHUB_REF`, then `git describe --tags`, then the literal `1.0.0`. The last step is a plain fallback -- no warning and no failure.
@@ -64,7 +63,6 @@ which also covers deliberate non-goals.
 **Why it matters:** A build from a repository with no tags, or a shallow clone where `git describe` cannot reach one, produces `WinTypingSpeed-1.0.0-Setup.exe`: a normal-looking installer with a wrong version, which then collides with any genuine 1.0.0 already released. Nothing downstream notices, because the filename is well-formed. CI checks out full history specifically to make the third step work, which shows the fragility was understood without being surfaced.
 
 **Suggested fix:** Warn loudly when the fallback is used, or fail the build unless an explicit `-Version` is supplied. A version derived from nothing is worse than a build that refuses to run.
-
 
 ---
 

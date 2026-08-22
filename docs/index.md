@@ -3,7 +3,7 @@
 A Windows tray application that measures typing speed across every application, using a
 low-level keyboard hook that deliberately never learns which key you pressed.
 
-```
+```text
 typing-speed-windows/
 ├── WinTypingSpeed.Core/          session state machine, no UI, no packages
 │   ├── TypingSessionTracker.cs   counting, timing, pause/resume — thread-safe
